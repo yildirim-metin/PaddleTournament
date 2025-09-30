@@ -1,8 +1,10 @@
+DROP TABLE IF EXISTS [Match]
+
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Match]') AND type in (N'U'))
 BEGIN
   CREATE TABLE [dbo].[Match]
   (
-    [Id] INT NOT NULL PRIMARY KEY,
+    [Id] INT IDENTITY NOT NULL CONSTRAINT [PK_Match] PRIMARY KEY,
     [TournamentId] INT NOT NULL,
     [TeamAId] INT NOT NULL,
     [TeamBId] INT NOT NULL,

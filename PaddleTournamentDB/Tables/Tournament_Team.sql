@@ -1,8 +1,10 @@
+DROP TABLE IF EXISTS Tournament_Team
+
 IF NOT EXISTS (SELECT * FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[Tournament_Team]') AND type in (N'U'))
 BEGIN
   CREATE TABLE [dbo].[Tournament_Team]
   (
-    [Id] INT NOT NULL PRIMARY KEY,
+    [Id] INT IDENTITY NOT NULL CONSTRAINT [PK_TournamentTeam] PRIMARY KEY,
     [TournamentId] INT NOT NULL,
     [TeamId] INT NOT NULL,
     [DateTournament] DATE NOT NULL,
