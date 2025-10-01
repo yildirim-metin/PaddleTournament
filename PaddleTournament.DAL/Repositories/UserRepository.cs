@@ -6,7 +6,19 @@ namespace PaddleTournament.DAL.Repositories;
 
 public class UserRepository
 {
-    private readonly string _connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PaddleTournamentDB;Integrated Security=True;Pooling=False;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Name=vscode-mssql;Application Intent=ReadWrite;Command Timeout=30";
+    private readonly string? _connectionString;
+    
+    public UserRepository()
+    {
+        foreach (var line in File.ReadAllLines("../../.env"))
+        {
+            var parts = line.Split(':');
+            if (parts[0] == "CONNECTION_STRING")
+            {
+                _connectionString = parts[1];
+            }
+        }
+    }
 
     public User? GetUserByEmail(string email)
     {
@@ -28,7 +40,7 @@ public class UserRepository
         {
             return null;
         }
-        
+
         return new User()
         {
             Id = (int)reader["Id"],
