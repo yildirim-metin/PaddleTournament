@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using Microsoft.Data.SqlClient;
 using PaddleTournament.DL.Enums;
 using PaddleTournament.DL.Models;
@@ -18,6 +19,24 @@ public class UserRepository
                 _connectionString = parts[1];
             }
         }
+    }
+
+    public void AddUser(User user)
+    {
+        using SqlConnection connection = new(_connectionString);
+        using SqlCommand command = connection.CreateCommand();
+
+        command.CommandText = @"
+        Insert Into [user](Email,PasswordHash,UserName)values(@email,@password,@username)
+      
+        ";
+        command.Parameters.AddWithValue("@email", user.Email);
+        command.Parameters.AddWithValue("@password", user.PasswordHash);
+         command.Parameters.AddWithValue("@username", user.Username);
+
+        connection.Open();
+        command.ExecuteNonQuery();
+      
     }
 
     public User? GetUserByEmail(string email)

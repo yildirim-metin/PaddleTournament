@@ -22,7 +22,35 @@ public class UserController : Controller
     [HttpPost]
     public IActionResult Login([FromForm] LoginFormDto form)
     {
-        User? user = _userService.GetUserByEmail(form.Email);
-        return View(form);
+
+
+        try
+        {
+            User? user = _userService.GetUserByEmail(form.Email, form.Password);
+        }
+        catch (System.Exception ex)
+        {
+
+            ModelState.AddModelError("Password", ex.Message);
+            return View(form);
+        }
+        return RedirectToAction("Index","Home");
+      
+
+    }
+
+    [HttpGet]
+     public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public IActionResult Register([FromForm] RegisterFormDto form)
+    {
+
+        _userService.AddUser(form.Email, form.Password, form.UserName);
+        return RedirectToAction("Login", "User");
+        
     }
 }
