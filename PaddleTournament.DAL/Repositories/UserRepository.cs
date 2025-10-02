@@ -1,19 +1,11 @@
 using Microsoft.Data.SqlClient;
-using PaddleTournament.DAL.Utils;
 using PaddleTournament.DL.Enums;
 using PaddleTournament.DL.Models;
 
 namespace PaddleTournament.DAL.Repositories;
 
-public class UserRepository
+public class UserRepository : BaseRepository
 {
-    private readonly string? _connectionString;
-    
-    public UserRepository()
-    {
-        _connectionString = EnvironmentFileReader.GetConnectionString();
-    }
-
     public void AddUser(User user)
     {
         using SqlConnection connection = new(_connectionString);

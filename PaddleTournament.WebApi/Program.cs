@@ -12,6 +12,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TeamRepository>();
+builder.Services.AddScoped<TeamService>();
+
 
 var app = builder.Build();
 
