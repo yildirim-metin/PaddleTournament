@@ -1,5 +1,5 @@
-using System.Diagnostics.Tracing;
 using Microsoft.Data.SqlClient;
+using PaddleTournament.DAL.Utils;
 using PaddleTournament.DL.Enums;
 using PaddleTournament.DL.Models;
 
@@ -11,14 +11,7 @@ public class UserRepository
     
     public UserRepository()
     {
-        foreach (var line in File.ReadAllLines("../../.env"))
-        {
-            var parts = line.Split(':');
-            if (parts[0] == "CONNECTION_STRING")
-            {
-                _connectionString = parts[1];
-            }
-        }
+        _connectionString = EnvironmentFileReader.GetConnectionString();
     }
 
     public void AddUser(User user)

@@ -1,5 +1,9 @@
 using PaddleTournament.DAL.Repositories;
+using PaddleTournament.DAL.Utils;
 using PaddleTournament.DLL.Services;
+
+EnvironmentFileReader envReader = new();
+envReader.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
