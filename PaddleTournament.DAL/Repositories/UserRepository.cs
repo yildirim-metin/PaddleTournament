@@ -5,21 +5,10 @@ using PaddleTournament.DL.Models;
 
 namespace PaddleTournament.DAL.Repositories;
 
-public class UserRepository
+public class UserRepository : BaseRepository
 {
-    private readonly string? _connectionString;
+ 
     
-    public UserRepository()
-    {
-        foreach (var line in File.ReadAllLines("../../.env"))
-        {
-            var parts = line.Split(':');
-            if (parts[0] == "CONNECTION_STRING")
-            {
-                _connectionString = parts[1];
-            }
-        }
-    }
 
     public void AddUser(User user)
     {

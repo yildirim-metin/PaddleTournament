@@ -1,4 +1,5 @@
 using PaddleTournament.DAL.Repositories;
+using PaddleTournament.DL.Models;
 using PaddleTournament.DLL.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,9 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TeamRepository>();
+builder.Services.AddScoped<TeamService>();
+
 
 var app = builder.Build();
 
