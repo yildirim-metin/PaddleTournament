@@ -1,3 +1,4 @@
+using PaddleTournament.BLL.Services;
 using PaddleTournament.DAL.Repositories;
 using PaddleTournament.DAL.Utils;
 using PaddleTournament.DLL.Services;
@@ -14,7 +15,8 @@ builder.Services.AddScoped<UserRepository>();
 builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TeamRepository>();
 builder.Services.AddScoped<TeamService>();
-
+builder.Services.AddScoped<TournamentRepository>();
+builder.Services.AddScoped<TournamentService>();
 
 var app = builder.Build();
 

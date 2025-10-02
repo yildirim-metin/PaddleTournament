@@ -1,0 +1,59 @@
+@model PaddleTournament.WebApi.Models.Tournaments.RegisterTournamentFormDto;
+
+<h1>Page de tournoi</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Index">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group mb-2">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="Location" class="control-label"></label>
+                <input asp-for="Location" class="form-control" />
+                <span asp-validation-for="Location" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="StartDate" class="control-label"></label>
+                <input asp-for="StartDate" type="date" class="form-control" />
+                <span asp-validation-for="StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="NbrMinTeams" class="control-label"></label>
+                <input asp-for="NbrMinTeams" type="number" class="form-control" />
+                <span asp-validation-for="NbrMinTeams" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2">
+                <label asp-for="NbrMaxTeams" class="control-label"></label>
+                <input asp-for="NbrMaxTeams" type="number" class="form-control" />
+                <span asp-validation-for="NbrMaxTeams" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+        <div id="snackbar">Ta mère</div>
+    </div>
+</div>
+
+<script>
+    function showSnackbar(message) {
+        var x = document.getElementById("snackbar");
+        x.innerText = message;
+        x.className = "show";
+        setTimeout(function () {
+            x.className = x.className.replace("show", "");
+        }, 3000);
+    }
+</script>
+@if (TempData["SnackbarMessage"] != null)
+{
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            showSnackbar(@Html.Raw(System.Text.Json.JsonSerializer.Serialize(TempData["SnackbarMessage"])));
+        });
+    </script>
+}
