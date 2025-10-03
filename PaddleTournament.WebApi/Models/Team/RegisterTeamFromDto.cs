@@ -11,10 +11,10 @@ public class RegisterTeamFromDto
     public string? TeamId { get; set; }
 
     [Required]
-    public string? PlayerName1 { get; set; }
+    public string? PlayerNameA { get; set; }
 
     [Required]
-    public string? PlayerName2 { get; set; }
+    public string? PlayerNameB { get; set; }
 
     public int UserAId { get; set; }
     

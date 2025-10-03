@@ -1,8 +1,8 @@
 
 using PaddleTournament.DL.Models;
 using Microsoft.AspNetCore.Mvc;
-using PaddleTournament.DLL.Services;
 using PaddleTournament.WebApi.Models.Team;
+using PaddleTournament.BLL.Services;
 namespace PaddleTournament.WebApi.Controllers;
 
 public class TeamController : Controller

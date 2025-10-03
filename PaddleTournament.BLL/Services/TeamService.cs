@@ -1,12 +1,9 @@
-
-
-
 using PaddleTournament.DAL.Repositories;
 using PaddleTournament.DL.Models;
 
-namespace PaddleTournament.DLL.Services;
+namespace PaddleTournament.BLL.Services;
 
-public class TeamService 
+public class TeamService
 {
     private readonly TeamRepository _teamRepository;
 
@@ -14,12 +11,13 @@ public class TeamService
     {
         _teamRepository = teamRepository;
     }
-     public void AddTeam(string TeamName, int idUser1, int idUser2)
+
+    public void AddTeam(string TeamName, int userAId, int userBId)
     {
         Team team = new Team();
         team.Name = TeamName;
-        team.UserAId = 2;
-        team.UserBId = 2;
+        team.UserAId = userAId;
+        team.UserBId = userBId;
         _teamRepository.AddTeam(team);
     }
 }

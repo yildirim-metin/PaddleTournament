@@ -2,7 +2,7 @@ using Isopoh.Cryptography.Argon2;
 using PaddleTournament.DAL.Repositories;
 using PaddleTournament.DL.Models;
 
-namespace PaddleTournament.DLL.Services;
+namespace PaddleTournament.BLL.Services;
 
 public class UserService
 {
@@ -13,18 +13,19 @@ public class UserService
         _userRepository = userRepository;
     }
 
-    public void AddUser(string email, string password,string username)
+    public void AddUser(string email, string password, string username)
     {
-        User user = new User();
-        user.Username = username;
-        user.Email = email;
-        user.PasswordHash = Argon2.Hash(password);
+        User user = new User()
+        {
+            Username = username,
+            Email = email,
+            PasswordHash = Argon2.Hash(password),
+        };
         _userRepository.AddUser(user);
     }
 
     public User? GetUserByEmail(string email, string password)
     {
-
         User? user = _userRepository.GetUserByEmail(email);
 
         if (user != null)
@@ -37,5 +38,4 @@ public class UserService
         }
         return null;
     }
-    
 }
