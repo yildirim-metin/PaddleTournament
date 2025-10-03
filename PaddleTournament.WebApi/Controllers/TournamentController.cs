@@ -22,9 +22,7 @@ public class TournamentController : Controller
     public IActionResult Index([FromForm] RegisterTournamentFormDto form)
     {
         _tournamentService.Add(form.Name, form.Location, form.StartDate, form.NbrMaxTeams, form.NbrMinTeams);
-        form = new();
-
-        TempData["SnackbarMessage"] = "Tournament was created."; 
+        TempData["SnackbarMessage"] = "Tournament was created.";
         return View(form);
     }
 }
