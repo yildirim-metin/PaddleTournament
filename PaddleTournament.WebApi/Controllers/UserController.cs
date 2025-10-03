@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using PaddleTournament.BLL.Exceptions;
 using PaddleTournament.BLL.Services;
 using PaddleTournament.DL.Models;
 using PaddleTournament.WebApi.Models.Users;
@@ -24,11 +26,11 @@ public class UserController : Controller
     {
         try
         {
-            User? user = _userService.GetUserByEmail(form.Email, form.Password);
+            User user = _userService.GetUserByEmail(form.Email, form.Password);
         }
-        catch (Exception ex)
+        catch (PaddleTournamentException)
         {
-            ModelState.AddModelError("Password", ex.Message);
+            ModelState.AddModelError<LoginFormDto>(f => f.ErrorMessage, "Invalid credentials. Please try again.");
             return View(form);
         }
 

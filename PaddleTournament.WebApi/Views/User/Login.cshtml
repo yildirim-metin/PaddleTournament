@@ -15,10 +15,15 @@
                 <label asp-for="Password" class="control-label"></label>
                 <input asp-for="Password" type="password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
-                <a class="link mb-5 mt-5" asp-action="Register">Don't have an account ? Sign up here !</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+            <div class="from-group mb-2 text-center">
+                <span asp-validation-for="ErrorMessage" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-2 text-center">
+                <a class="link" asp-action="Register">Don't have an account ? Sign up here !</a>
+            </div>
+            <div class="form-group text-center">
+                <input type="submit" value="Sign in" class="btn btn-primary" />
             </div>
         </form>
     </div>

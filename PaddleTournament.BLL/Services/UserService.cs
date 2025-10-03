@@ -1,4 +1,5 @@
 using Isopoh.Cryptography.Argon2;
+using PaddleTournament.BLL.Exceptions;
 using PaddleTournament.DAL.Repositories;
 using PaddleTournament.DL.Models;
 
@@ -24,18 +25,15 @@ public class UserService
         _userRepository.AddUser(user);
     }
 
-    public User? GetUserByEmail(string email, string password)
+    public User GetUserByEmail(string email, string password)
     {
-        User? user = _userRepository.GetUserByEmail(email);
+        User user = _userRepository.GetUserByEmail(email) ?? throw new UserNotFoundException();
 
-        if (user != null)
+        if (!Argon2.Verify(user.PasswordHash, password))
         {
-            if (Argon2.Verify(user.PasswordHash, password))
-            {
-                return user;
-            }
-            throw new Exception("password incorrect !");
+            throw new WrongPasswordException();
         }
-        return null;
+
+        return user;
     }
 }

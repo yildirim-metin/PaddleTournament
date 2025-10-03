@@ -19,5 +19,4 @@ public class RegisterFormDto
     [Required]
     [Compare("Password")]
     public string ConfirmPassword { get; set; } = null!;
-
 }
