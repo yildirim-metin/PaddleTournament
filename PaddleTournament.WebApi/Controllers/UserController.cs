@@ -1,3 +1,7 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using PaddleTournament.BLL.Exceptions;
@@ -27,6 +31,16 @@ public class UserController : Controller
         try
         {
             User user = _userService.GetUserByEmail(form.Email, form.Password);
+
+            ClaimsPrincipal claims = new(
+                new ClaimsIdentity([
+                    new Claim(ClaimTypes.Sid, user.Id.ToString()),
+                    new Claim(ClaimTypes.Role, user.Role.ToString()),
+                    new Claim(ClaimTypes.Name, user.Username),
+                ], CookieAuthenticationDefaults.AuthenticationScheme)
+            );
+
+            HttpContext.SignInAsync(claims);
         }
         catch (PaddleTournamentException)
         {
@@ -48,5 +62,12 @@ public class UserController : Controller
     {
         _userService.AddUser(form.Email, form.Password, form.UserName);
         return RedirectToAction("Login", "User");
+    }
+
+    [Authorize]
+    public IActionResult Logout()
+    {
+        HttpContext.SignOutAsync();
+        return RedirectToAction("Index", "Home");
     }
 }
